@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {useEffect} from "react";
 import {Todo} from "./types/todo";
 import TodoInput from "./components/TodoInput.tsx";
+import TodoList from "./components/TodoList.tsx";
 
 function App() {
     const [todos, setTodos] = useState<Todo[]>(() => {
@@ -72,22 +73,11 @@ function App() {
                 </button>
             </div>
 
-            <ul>
-                {filteredTodos.map((todo) => (
-                    <li key={todo.id}>
-                <span
-                    style={{
-                        textDecoration: todo.completed ? "line-through" : "none",
-                        cursor: "pointer",
-                    }}
-                    onClick={() => handleToggle(todo.id)}
-                >
-                  {todo.text}
-                </span>
-                        <button onClick={() => handleDelete(todo.id)}>삭제</button>
-                    </li>
-                ))}
-            </ul>
+            <TodoList
+                todos={filteredTodos}
+                onToggle={handleToggle}
+                onDelete={handleDelete}
+            />
         </div>
     );
 }
