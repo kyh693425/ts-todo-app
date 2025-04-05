@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useEffect} from "react";
 import {Todo} from "./types/todo";
+import TodoInput from "./components/TodoInput.tsx";
 
 function App() {
     const [todos, setTodos] = useState<Todo[]>(() => {
@@ -53,15 +54,11 @@ function App() {
         <div style={{padding: "20px", maxWidth: "400px", margin: "0 auto"}}>
             <h1>📝 To-Do List</h1>
 
-            <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") handleAddTodo();
-                }}
-                placeholder="할 일을 입력하세요"
+            <TodoInput
+                input={input}
+                onChange={setInput}
+                onAdd={handleAddTodo}
             />
-            <button onClick={handleAddTodo}>추가</button>
 
             <div style={{margin: "10px 0"}}>
                 <button onClick={() => setFilter("all")}
@@ -78,15 +75,15 @@ function App() {
             <ul>
                 {filteredTodos.map((todo) => (
                     <li key={todo.id}>
-            <span
-                style={{
-                    textDecoration: todo.completed ? "line-through" : "none",
-                    cursor: "pointer",
-                }}
-                onClick={() => handleToggle(todo.id)}
-            >
-              {todo.text}
-            </span>
+                <span
+                    style={{
+                        textDecoration: todo.completed ? "line-through" : "none",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => handleToggle(todo.id)}
+                >
+                  {todo.text}
+                </span>
                         <button onClick={() => handleDelete(todo.id)}>삭제</button>
                     </li>
                 ))}
