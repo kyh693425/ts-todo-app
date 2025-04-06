@@ -1,6 +1,7 @@
 import {useTodos} from "./hooks/useTodos";
 import TodoInput from "./components/TodoInput.tsx";
 import TodoList from "./components/TodoList.tsx";
+import FilterButtons from "./components/FilterButtons.tsx";
 
 function App() {
     const {
@@ -24,17 +25,7 @@ function App() {
                 onAdd={handleAddTodo}
             />
 
-            <div style={{margin: "10px 0"}}>
-                <button onClick={() => setFilter("all")}
-                        style={{fontWeight: filter === "all" ? "bold" : "normal"}}>전체
-                </button>
-                <button onClick={() => setFilter("active")}
-                        style={{fontWeight: filter === "active" ? "bold" : "normal"}}>진행중
-                </button>
-                <button onClick={() => setFilter("completed")}
-                        style={{fontWeight: filter === "completed" ? "bold" : "normal"}}>완료
-                </button>
-            </div>
+            <FilterButtons filter={filter} setFilter={setFilter} />
 
             <TodoList
                 todos={filteredTodos}
