@@ -12,6 +12,9 @@ const TodoInput: FC<TodoInputProps> = ({input, onChange, onAdd}) => {
             <input
                 value={input}
                 onChange={(e) => onChange(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") onAdd();
+                }}
                 placeholder="할 일을 입력하세요"
             />
             <button onClick={onAdd}>추가</button>
