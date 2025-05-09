@@ -3,21 +3,21 @@ import {FC} from "react";
 interface TodoInputProps {
     input: string;
     onChange: (value: string) => void;
-    onAdd: () => void;
+    onAdd: (value: string) => void;
 }
 
-const TodoInput: FC<TodoInputProps> = ({input, onChange, onAdd}) => {
+const TodoInput: FC<TodoInputProps> = ({ input, onChange, onAdd }) => {
     return (
         <div>
             <input
+                placeholder="할 일을 입력하세요"
                 value={input}
                 onChange={(e) => onChange(e.target.value)}
                 onKeyDown={(e) => {
-                    if (e.key === "Enter") onAdd();
+                    if (e.key === "Enter") onAdd(input);
                 }}
-                placeholder="할 일을 입력하세요"
             />
-            <button onClick={onAdd}>추가</button>
+            <button onClick={() => onAdd(input)}>추가</button>
         </div>
     );
 };
